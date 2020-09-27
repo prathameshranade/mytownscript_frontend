@@ -1,0 +1,93 @@
+<div style="color:#fff">
+    <div class="landingPageBody"></div>
+    <div class="grad"></div>
+    <div class="row">
+        <div class="visible-xs visible-sm">
+            <p style="padding-top:3em"></p>
+        </div>
+        <div class="header col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-3">
+            <div class="visible-md visible-lg">
+                <p style="padding:2em"></p>
+            </div>
+            <div>MyTown<span>Scripts</span></div><br>
+            <button class="btn btn-block btn-sm" style="background-color:#4858ac; color:#fff"><a href="http://hotels.mytownscripts.com/" target="_blank" style="background-color:#4858ac; color:#fff">Go to Hotels</a></button>
+<!--            <div style="font-size:1.5em; padding-left:1.2em;">for the <span>writer in you !</span></div>-->
+<!--            <div style="font-size:1.5em;">for writing enthusiasts in<span> Mahad !</span></div>-->
+        </div>
+        <div class="landingRegister col-xs-offset-2 col-xs-11 col-md-offset-1 col-md-3">
+            <div class="visible-md visible-lg">
+                <p style="padding:4em"></p>
+            </div>
+            <form name="landingRegisterForm" ng-submit="doRegister()">
+                <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterUsername.$error.required &&    !landingRegisterForm.landingRegisterUsername.$pristine }">
+                    <input type="text" class="form-control" name="landingRegisterUsername" id="landingRegisterUsername" placeholder="username" ng-model="registerData.username" required>
+                    <span ng-show="landingRegisterForm.landingRegisterUsername.$error.required && !landingRegisterForm.landingRegisterUsername.$pristine" class="help-block"> Your Username is required. </span>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerError }">
+                        <span ng-show="registerError" class="help-block"> Use a different Username. </span>
+                    </div>
+                </div>
+                <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterPassword.$error.required && !landingRegisterForm.landingRegisterPassword.$pristine }">
+                    <input type="password" class="form-control" name="landingRegisterPassword" id="landingRegisterPassword" placeholder="Password" ng-model="registerData.password" required>
+                    <span ng-show="landingRegisterForm.landingRegisterPassword.$error.required && !landingRegisterForm.landingRegisterPassword.$pristine" class="help-block"> Your Password is required. </span>
+                </div>
+                <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterJoineeType.$error.required && !landingRegisterForm.landingRegisterJoineeType.$pristine }" ng-show="registerData.password">
+                    <label style="color:#fff">Join as: </label>
+                    <select ng-model="joineeType" ng-options="item for item in joineeTypes" name="landingRegisterJoineeType" style="color:#000;"></select>
+                    <span ng-show="landingRegisterForm.landingRegisterJoineeType.$error.required && !landingRegisterForm.landingRegisterJoineeType.$pristine" class="help-block"> Joinee type is required. </span>
+                </div>
+                <span ng-show="!landingRegisterForm.landingRegisterJoineeType.$pristine">
+                    <span ng-show="(joineeType=='Restaurant')">
+                        <div ng-class="{ 'has-error': !registerData.name && !landingRegisterForm.landingRegisterName.$pristine }" style="display:inline-block">
+                            <input type="text" class="form-control" name="landingRegisterName" id="landingRegisterName" placeholder="Name" ng-model="registerData.name">
+                            <span ng-show="!registerData.name && !landingRegisterForm.landingRegisterName.$pristine" class="help-block"> {{joineeType}}'s name is required. </span>
+                        </div>
+                    </span>
+                    <span ng-show="(joineeType=='Citizen')">
+                        <div ng-class="{ 'has-error': !registerData.firstname && !landingRegisterForm.landingRegisterFirstname.$pristine }" style="display:inline-block">
+                            <input type="text" class="form-control" name="landingRegisterFirstname" id="landingRegisterFirstname" placeholder="First name" ng-model="registerData.firstname">
+                            <span ng-show="!registerData.firstname && !landingRegisterForm.landingRegisterFirstname.$pristine" class="help-block"> Your First name is required. </span>
+                        </div>
+                        <div ng-class="{ 'has-error': !registerData.lastname && !landingRegisterForm.landingRegisterLastname.$pristine }" style="display:inline-block">
+                            <input type="text" class="form-control" name="landingRegisterLastname" id="landingRegisterLastname" placeholder="Surname" ng-model="registerData.lastname">
+                            <span ng-show="!registerData.lastname && !landingRegisterForm.landingRegisterLastname.$pristine" class="help-block"> Your Last name is required. </span>
+                        </div>
+                    </span>
+                </span>
+                <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterEmail.$error.required &&  !landingRegisterForm.landingRegisterEmail.$pristine }" ng-show="(registerData.lastname || registerData.name)">
+                    <input type="email" class="form-control" name="landingRegisterEmail" id="landingRegisterEmail" placeholder="Email" ng-model="registerData.email" required>
+                    <span ng-show="landingRegisterForm.landingRegisterEmail.$error.required && !landingRegisterForm.landingRegisterEmail.$pristine" class="help-block"> Your Email is required. </span>
+                </div>
+                <span ng-show="registerData.email">
+                    <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterHometown.$error.required &&  !landingRegisterForm.landingRegisterHometown.$pristine }" style="display:inline-block">
+                    <input type="text" class="form-control" name="landingRegisterHometown" id="landingRegisterHometown" placeholder="Hometown" ng-model="registerData.hometown" required>
+                    <span ng-show="landingRegisterForm.landingRegisterHometown.$error.required && !landingRegisterForm.landingRegisterHometown.$pristine" class="help-block"> Your Hometown is required. </span>
+                </div>
+                    <div ng-class="{ 'has-error': landingRegisterForm.landingRegisterPincode.$error.required &&  !landingRegisterForm.landingRegisterPincode.$pristine }" style="display:inline-block">
+                    <input type="number" class="form-control" name="landingRegisterPincode" id="landingRegisterPincode" placeholder="Pincode" min="100000" ng-model="registerData.pincode" required>
+                    <span ng-show="landingRegisterForm.landingRegisterPincode.$error.required && !landingRegisterForm.landingRegisterPincode.$pristine" class="help-block"> Your Pincode is required. </span>
+                </div>
+                </span>
+                <!--<span ng-show="((registerData.hometown) && (joineeType=='Citizen'))">
+                    <div ng-class="{ 'has-error': !registerData.gender && !landingRegisterForm.landingRegisterGender.$pristine }" style="display:inline-block">
+                        <label class="radio-inline">
+                            <input type="radio" name="landingRegisterGender" value="male" ng-model="registerData.gender">Male
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="landingRegisterGender" value="female" ng-model="registerData.gender">Female
+                        </label>
+                        <span ng-show="!registerData.gender && !landingRegisterForm.landingRegisterGender.$pristine" class="help-block"> Your Gender is required. </span>
+                    </div>
+                    <div ng-class="{ 'has-error': !registerData.birthdate && !landingRegisterForm.landingRegisterBirthdate.$pristine }">
+                        <input type="date" class="form-control" name="landingRegisterBirthdate" id="landingRegisterBirthdate" placeholder="Birthdate" ng-model="registerData.birthdate"> <span style="font-size:1em;color:#b2b2b2">Birthday</span>
+                        <span ng-show="!registerData.birthdate && !landingRegisterForm.landingRegisterBirthdate.$pristine" class="help-block"> Your Birthdate is required. </span>
+                    </div>
+                </span>-->
+                <div ng-class="{ 'has-error': incompleteForm }"><span ng-show="incompleteForm" class="help-block"> Please fill all the fields. </span></div>
+                <button type="submit" class="btn" ng-disabled="landingRegisterForm.$invaled" >Register</button>
+            </form>
+            <a type="button" class="btn" href="users/facebook" style="color:#fff;background-color:#4267b2"><i class="fa fa-facebook-official" aria-hidden="true"></i>  Log in with Facebook</a>
+        </div>
+    </div>
+</div>

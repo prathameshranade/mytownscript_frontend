@@ -1,0 +1,40 @@
+<div class="ngdialog-message">
+    <div>
+        <div ng-controller="loginModalController">
+            <div class="">
+                <h3 class="text-center">Verification </h3>
+            </div>
+            <div class="">&nbsp;</div>
+                
+            <div class="">
+                <h3 style="color:#293882" class="text-center">Hello ! You would need to verify yourself to avail full features. This is just to keep fake people away from intruding your privacy. </h3>
+                <h3 style="color:#293882" class="text-center">You can verify using one of the below two methods.</h3>
+                <div>
+                    <h3 style="font-size:1.3em; color:#243172;">1. Verify through a Secure Gateway.</h3>
+                    <p>
+                        <a type="button" class="btn btn-xs" style="background-color:#4858ac; color:#fff;" ng-disabled=true>Verify</a><span style="color:#4858ac;">&nbsp; This option not yet active</span>
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-size:1.3em; color:#243172;">2. Upload photo of your Aadhar card.(Your name and addess should be visible)</h3>
+                    <div ng-show="(!aadharNumberUploadStatus && !citizenPresenceStatus)">
+                        <h3 style="font-size:1.1em;">A. Your name on the the Aadhar card should be visible here.</h3>
+                        <p><label class="btn btn-sm" style="background-color:#4858ac; color:#fff;" for="aadhar_number_verify_image_registration">Upload photo</label></p>
+                        <input type="file" file-model="aadharNumberVerificationDocImage.upload" name="aadharNumberVerificationImage" id="aadhar_number_verify_image_registration" style="display:none" accept="image/*">
+                        <p><button type="button" class="btn btn-xs" style="background-color:#4858ac; color:#fff;" ng-if="aadharNumberVerificationDocImage.upload" ng-click="uploadAadharNumberVerificationImage()">Submit photo</button></p>
+                        <h3 style="font-size:1.1em;" ng-show="!aadharNumberVerificationDocButtonStatus">Please wait...</h3>
+                    </div>
+                    <div ng-show="citizenPresenceStatus"><h3 style="font-size:1.1em;" ng-show="!aadharNumberVerificationDocButtonStatus">You have already applied. Please wait for the process. Press "<span style="color:#922e3f;">Continue without verification</span>" to continue for now.</h3></div>
+                    <div ng-show="aadharNumberUploadStatus">
+                        <h3 style="font-size:1.1em;">B. Your address on the the Aadhar card should be visible here.</h3>
+                        <p><label class="btn btn-sm" style="background-color:#4858ac; color:#fff;" for="aadhar_verify_image_registration">Upload photo</label></p>
+                        <input type="file" file-model="addressVerificationDocImage.upload" name="addressVerificationImage" id="aadhar_verify_image_registration" style="display:none" accept="image/*">
+                        <p><button type="button" class="btn btn-xs" style="background-color:#4858ac; color:#fff;" ng-if="addressVerificationDocImage.upload" ng-click="uploadAddressVerificationDoc()">Submit photo</button></p>
+                        <h3 style="font-size:1.1em;" ng-show="!addressVerificationDocButtonStatus">Please wait...</h3>
+                    </div>
+                </div>
+                <h3><button type="button" class="btn btn-xs" style="background-color:#922e3f; color:#fff;" ng-click="continueWithoutVerification()" ng-if="!loggedIn">Continue without verification</button></h3>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="ngdialog-message">
+    <div>
+        <div class="">
+            <h3>Login </h3>
+        </div>
+        <div class="">&nbsp;</div>    
+        <div class="">
+            <form name="loginForm" ng-submit="doLogin()" novalidate>                    <!--No HTML validation required(no validate)-->
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': loginForm.loginUsername.$error.required && !loginForm.loginUsername.$pristine }">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" class="form-control input-sm" name="loginUsername" id="loginUsername" placeholder="Username" ng-model="loginData.username" required>
+                        <span ng-show="loginForm.loginUsername.$error.required && !loginForm.loginUsername.$pristine" class="help-block"> Your Username is required. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': loginForm.loginPassword.$error.required && !loginForm.loginPassword.$pristine }">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" class="form-control input-sm" name="loginPassword" id="loginPassword" placeholder="Password" ng-model="loginData.password" required>
+                        <span ng-show="loginForm.loginPassword.$error.required && !loginForm.loginPassword.$pristine" class="help-block"> Your Password is required. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': loginError }">
+                        <span ng-show="loginError" class="help-block"> Username or Password incorrect. </span>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="rememberMe"> Remember me
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <button type="submit" class="btn btn-info btn-sm" ng-disabled="loginForm.$invalid">Sign in</button>
+                        <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog()>Cancel</button>
+                    </div>
+                    <div class="col-xs-5">
+                        <div><button class="btn" style="background-color:#4267b2"><a href="users/facebook" style="color:#fff"><i class="fa fa-facebook-official" aria-hidden="true"></i>  Log in with Facebook</a></button></div>
+                    </div>
+                </div>
+                <!--<a ng-click=openRegister()>Click here to register</a>-->
+                <div style="margin-top:1em;font-size:0.8em;"><a ng-click="openSetPassword()">Forgotten password ?</a></div>
+                <div class="form-group row">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <button type="button" class="btn btn-primary btn-lg btn-block login-button" ng-click="openRegister()">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-3 col-md-6" ng-if="!showSearchResults">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+                    <div>
+                        <h3>{{message}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="showSearchResults">
+                <div class="col-md-3 visible-md visible-lg" style="padding: 0em 0em 0em 1.1em;">
+                    <div class="" style="">
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 0.5em 0em; margin-bottom:0.7em; color:#000;">
+                            <div class="row" style="">
+                                <div class="col-xs-offset-1 col-xs-3" style="">
+                                    <img ng-src={{profilePicture}} class="img-circle" height="65em" width="60em">
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    <h3 style="margin-bottom:0em;margin-top:0.3em"><strong>{{username}}</strong></h3>        <!--Check Strong or not-->
+                                    <h5 class="text-muted" style="margin-top:0.5em;">{{professions}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; padding:0.5em 0.5em 0em 0.5em; margin:0em 0em 0.7em 0em; color:#000;">                                                       <!--Check the colors-->
+                            <div>
+                                <p class="text-center" style="font-size:1.7em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>Search</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-lg-6">
+                    <div style="background-color:#FCFCFC;color:#000;padding:0.85em">
+                        <div class="text-center" ng-if="noSearchResults">
+                            <p style="font-size:2em">Nobody Found</p>
+                            <h5 class="text-muted" style="margin-top:0.5em;">Type fullname or firstname,</h5>
+                            <h5 class="text-muted" style="margin-top:0.5em;">Example, Virat Kohli</h5>
+                        </div>
+                        <ul class="media-list list-group" ng-repeat="profile in professionalSearchResults">
+                            <li class="media list-group-item">
+                                <a style="color:#000" ui-sref="app.professional_profile({scope:profile.scope,id: profile._id})">
+                                    <div class="media-left media-top">
+                                        <img class="media-object img-thumbnail" ng-src={{profile.professionalProfile.profilePicture}} height="60em" width="60em" alt="Peter Pan">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading" style="color:#293882; font-size:1.1em;"><strong>{{profile.firstname}}&nbsp;{{profile.lastname}}</strong></h5>
+                                        <p style="font-size:1.1em;"><small>{{profile.hometown}}</small></p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <div class="col-lg-3 visible-md visible-lg"></div>
+            </div>
+        </div>
+    </div>
+</div>

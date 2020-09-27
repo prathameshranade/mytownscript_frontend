@@ -1,0 +1,56 @@
+<div id="writing_opinion_section">
+<div class="ngdialog-message">
+<div>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <h4>{{Message}}</h4>
+                    <form name="writing_opinion" ng-submit="sendWritingOpinion()">
+                        <div class="form-group row">
+                            <div class="col-xs-offset-1 col-xs-10">
+                                <strong><input type="text" style="height:3em; font-size:1.25em;" class="form-control text-center" id="writing_opinion_title" placeholder="Title" ng-model="writingSpaceOpinionInput.title" required></strong>
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-if="!checkMusing">
+                            <div class="col-xs-12">
+                                <textarea class="form-control" id="writing_opinion_short_description" placeholder="Subtitle" rows="2" ng-model="writingSpaceOpinionInput.shortDescription"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <div ng-show="!checkMusing" class="text-center">
+                                <p style="font-size:1.2em; color:#243172;"><strong>Upload photo for writing</strong></p>
+                                <label class="btn btn-sm" style="background-color:#4858ac; color:#fff;" for="writing_image"> Browse </label><h3 ng-show="file.upload" style="font-size:1em; margin-top:1em; margin-bottom:0em;display:inline-block; padding-left:0.4em;"><i class="fa fa-circle" style="color:#da2429; font-size:0.8em;" aria-hidden="true"></i>&nbsp;<p style="color:#243172; display:inline-block; margin:0em; padding:0em;">1 Photo selected</p></h3>
+                                <br>
+                                <input type="file" file-model="file.upload" name="file" id="writing_image" style="display:none" accept="image/*">
+                                <br>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-12">
+                                <textarea class="form-control" id="writing_opinion_article" placeholder={{articlePlaceholder}} rows={{articleRows}} maxlength={{articleCharacterLength}} minlength={{articleCharacterMinLength}} ng-model="writingSpaceOpinionInput.article" style="font-size:{{articleFontSize}}" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-if="verified">
+                            <div class="col-xs-12" ng-if="!checkMusing">
+                                <label>Flikart Product Link&nbsp;<button type="button" class="btn btn-xs" style="background-color:#fff; color:#4858ac; padding:0em;" ng-click="toggleAdlinkInfo()"><i class="fa fa-info-circle" style="color:#4858ac;" aria-hidden="true"></i></button></label>
+                                <div style="padding:0em 1em 0em 1em;" ng-show="showAdlinkInfo">
+                                    <p>If you would like to earn money using this post, you can earn it by promoting a Flipkart Product here. Search a product on flipkart(which you think, you would be able to sell here), Copy the URL(link) of that product's page from the browser, and paste it in the space below. We would work on the link and make it payable for you.</p>
+                                    <p>Note: Select that product which is relevant to your post or the readers reading it.For example, if you are writing an experience about depression, you can sell a book with motivational content.</p>
+                                </div>
+                                <textarea class="form-control" id="writing_opinion_adLink" placeholder="Flikart Product Link" rows="1"  ng-model="writingSpaceOpinionInput.commercialInfo.advertiseLinkbyUser"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-offset-8 col-xs-2">
+                                <button type="submit" class="btn" style="background-color:#4858ac; color:#fff">Submit Writing</button>                                  <!--ng-disabled="feedbackForm.$invalid"-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

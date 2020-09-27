@@ -1,0 +1,39 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 visible-md visible-lg" style="padding-left:0em"></div>
+            <div class="col-lg-6 col-xs-12">
+                <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 1em 0.5em; margin-bottom:0.7em; color:#000">
+                    <h2 class="text-center" style="color:#293882">Hello {{username}},</h2>
+                    <h2 class="text-center" style="color:#293882">Please update the following fields about yourself.</h2>
+                    <form name="facebookUpdateForm" ng-submit="doUpdate()">
+                        <div class="row">
+                            <div ng-class="{ 'has-error': facebookUpdateForm.facebookUpdateHometown.$error.required &&  !facebookUpdateForm.facebookUpdateHometown.$pristine }" class="col-xs-6">
+                                <label>Hometown</label>
+                                <input type="text" class="form-control" name="facebookUpdateHometown" placeholder="Hometown" ng-model="updateData.hometown" required>
+                                <span ng-show="facebookUpdateForm.facebookUpdateHometown.$error.required && !facebookUpdateForm.facebookUpdateHometown.$pristine" class="help-block"> Your Hometown is required. </span>
+                            </div>
+                            <div ng-class="{ 'has-error': facebookUpdateForm.facebookUpdatePincode.$error.required &&  !facebookUpdateForm.facebookUpdatePincode.$pristine }" class="col-xs-6">
+                                <label>Pincode</label>
+                                <input type="number" class="form-control" name="facebookUpdatePincode" placeholder="Pincode" ng-model="updateData.pincode" required>
+                                <span ng-show="facebookUpdateForm.facebookUpdatePincode.$error.required && !facebookUpdateForm.facebookUpdatePincode.$pristine" class="help-block"> Your Pincode is required. </span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:1em;">
+                            <div ng-class="{ 'has-error': facebookUpdateForm.facebookUpdateBirthdate.$error.required && !facebookUpdateForm.facebookUpdateBirthdate.$pristine }" class="col-xs-offset-3 col-xs-6">
+                                <input type="date" class="form-control" name="facebookUpdateBirthdate" placeholder="Birthdate" ng-model="updateData.birthdate" required> <span style="font-size:1em;color:#b2b2b2">Birthday</span>
+                                <span ng-show="facebookUpdateForm.facebookUpdateBirthdate.$error.required && !facebookUpdateForm.facebookUpdateBirthdate.$pristine" class="help-block"> Your Birthdate is required. </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-offset-9"><button type="submit" class="btn btn-sm" style="background-color:#4858ac; color:#fff;" ng-disabled="registerForm.$invaled" >Update</button></div>
+                    </form>
+                </div>
+                <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:0.5em 1.5em 1em 1.5em; margin-bottom:0.7em; color:#000">
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-3 visible-md visible-lg" style="padding-left:0em"></div>
+        </div>
+    </div>
+</div>

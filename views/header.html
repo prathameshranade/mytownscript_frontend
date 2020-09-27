@@ -1,0 +1,99 @@
+<div>
+    <div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navbarMain">
+        <div class="container">
+            <div ng-if="loggedIn">
+            <div class="navbar-header">
+                <div>
+                <a class="navbar-brand" style="padding:0.7em 0.56em;" ui-sref="app.hotels_home"><span style="background-color:#fff;padding:0.5em 0.4em 0.2em 0.5em;"><i class="fa fa-university" style="color:#4858ac; font-size:1.4em;" aria-hidden="true"></i></span></a>
+                <ul class="nav navbar-nav pull-left">
+                    <!--<li class="pull-left"><a><i class="fa fa-users fa-lg"></i></a></li>
+                    <li class="pull-left"><a><i class="fa fa-newspaper-o fa-lg"></i></a></li>-->
+                    <li class="pull-left"><a ng-click="updateNewMessageStatus()" ui-sref="app.professional_messages"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i><span style="display:inline-block; vertical-align:top; color:#46a334; padding-left:0.2em;" ng-show="unseenMessages"><i class="fa fa-circle" style="font-size:0.5em; color:#e60000;" aria-hidden="true"></i></span></a></li>
+                    <li class="pull-left"><a ng-click="updateNewNotificationStatus()" ui-sref="app.professional_notifications"><i class="fa fa-bell fa-lg"></i><span style="display:inline-block; vertical-align:top;" ng-show="newNotifications"><i class="fa fa-circle" style="font-size:0.5em; color:#e60000;" aria-hidden="true"></i></span></a></li>
+                </ul>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                </div>
+            </div>
+            <div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="padding-left:2em"><a class="navbar-brand" style="padding:0.556em" ui-sref="app.professionalSelfProfile"><img ng-src={{profilePicture}} height="30" width="30" class="img-rounded"></a></li>
+                        <li><a style="padding:1.1em 1em 0em 0em" ui-sref="app.professionalSelfProfile">{{username}}</a></li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding:1em 1.3em 1em 1.3em"><i class="fa fa-caret-down fa-lg"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a ui-sref="app.writing_space">
+                                    Writing Space
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a ng-click="viewEarnings()">
+                                    View Earnings
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="checkVerificationStatus()">
+                                    Verification Status
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="openChangePassword()">
+                                    Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="openUserManual()">
+                                    User Manual
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="openContactUs()">
+                                    Contact us
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a ng-click="doLogout()">
+                                    <span class="glyphicon glyphicon-log-in"></span> Logout
+                                </a>
+                            </li>
+                        </ul>
+                     </li>
+                    </ul>
+                    <form class="navbar-form navbar-right" ng-submit="submitSearch()">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nav_search_input_field" placeholder="Search" ng-model="searchQueryParameters.searchQueryParameters" minlength="2">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default btn-sm" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+            </div>
+            <div ng-if="!loggedIn">
+                <div class="navbar-header">                    
+                    <a class="navbar-brand" style="padding:0.56em" ui-sref="app"> MyTownScripts</a>    <!--<i   class="fa fa-university"></i>-->                
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="openLogin()">
+                        <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    </div>
+</div>
+<p style="padding:1.8em"></p>

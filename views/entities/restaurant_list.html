@@ -1,0 +1,79 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-3 col-md-6" ng-if="!showHotelsList">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+                    <div>
+                        <h3>{{message}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="showHotelsList">
+                <div class="col-md-3 visible-md visible-lg visible-xl" style="padding: 0em 0em 0em 1.1em;" ng-controller="LeftGridController">
+                    <div class="" style="">
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 0.5em 0em; margin-bottom:0.7em; color:#000;">
+                            <div class="row" style="">
+                                <div class="col-xs-offset-1 col-xs-3" style="">
+                                    <img ng-src={{profilePicture}} class="img-circle" height="65em" width="60em">
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    <h3 style="margin-bottom:0em;margin-top:0.3em"><strong>{{username}}</strong></h3>
+                                    <h5 class="text-muted" style="margin-top:0.5em;">{{professions}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; padding:0.5em 0.5em 0em 0.5em; margin:0em 0em 0.7em 0em; color:#000;">
+                            <div>
+                                <p class="text-center" style="font-size:1.7em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>Restaurant List</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div class="" style="background-color:#fff;padding:1em;">
+                        <div class="row">
+                            <div class="panel panel-warning col-xs-12">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Your Hotels</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="media-list">
+                                        <li class="media" ng-repeat="restaurant in restaurants">
+                                            <a href="http://hotels.mytownscripts.com.s3-website.ap-south-1.amazonaws.com/#/{{restaurant.restaurant.name}}" target="_blank">
+                                                <div class="media-left media-middle">
+                                                    <img class="media-object img-thumbnail img-responsive" ng-src={{restaurant.restaurant.displayPicture}} alt="Photo for Dish" width="100em">
+                                                </div>
+                                                <div class="media-body">
+                                                    <h2 class="media-heading" style="color:#333;">{{restaurant.restaurant.name}}
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3 visible-md visible-lg visible-xl">
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>{{townName}}</strong></p>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>{{townName}} Chronicles</b></p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Writing Space</b></p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

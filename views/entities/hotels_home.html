@@ -1,0 +1,120 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-3 col-md-6" ng-if="!showHotels">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+                    <div>
+                        <h3>{{message}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="showHotels">
+                <div class="col-md-3 visible-md visible-lg visible-xl" style="padding: 0em 0em 0em 1.1em;">
+                    <div class="" style="">
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 0.5em 0em; margin-bottom:0.7em; color:#000;">
+                            <div class="row" style="">
+                                <div class="col-xs-offset-1 col-xs-3" style="">
+                                    <img ng-src={{profilePicture}} class="img-circle" height="65em" width="60em">
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    <h3 style="margin-bottom:0em;margin-top:0.3em"><strong>{{username}}</strong></h3>        <!--Check Strong or not-->
+                                    <h5 class="text-muted" style="margin-top:0.5em;">{{professions}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div ng-controller="citizenController">
+                        <div>
+                            <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff; margin-bottom:0.7em;">
+                                <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em;color:#243172;">
+                                    <div class="visible-md visible-lg visible-xl"><h3 class="text-center" style="padding:0em 0em 0em 0em; margin: 0.5em 0em 0.5em 0em;"><strong>MyTown</strong></h3></div>
+                                    <div class="visible-xs visible-sm"><button type="button" class="btn" style="color:#fff; background-color:#3446a3; padding:0em 1em 0em 1em;" ng-click="toggleShowMobileMyTown()"><h3 class="text-center" style="padding:0em 0em 0em 0em; margin: 0.5em 0em 0.5em 0em;"><strong>MyTown</strong></h3></button></div>
+                                </div>
+                            </div>
+                            <div ng-if="showMobileMyTown">
+                                <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                                    <div>
+                                        <a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>{{townName}} Chronicles</b></p></a>
+                                    </div>
+                                    <hr style="margin-bottom:0em; margin-top:0em;">
+                                    <div>
+                                        <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Writing Space</b></p></a>
+                                    </div>
+                                </div>
+                                <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                                    <div>
+                                        <a href="http://hotels.mytownscripts.com" target="_blank"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Hotels</b></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="background-color:#fff;padding:1em;">
+                                <div class="row">
+                                    <div class="panel panel-warning col-xs-12">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title text-center">Your Hotels</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <ul class="list-group">
+                                                <li class="list-group-item text-center" ng-repeat="restaurant in restaurants"><a class="btn" ng-click="orderFood((dateNow | date : 'HH:mm'), restaurant.restaurant.name)"> <!-- ui-sref="app.order_food({restaurantName: restaurant.restaurant.name})"-->
+                                                    <h1>
+                                                        <span class="label label-warning">{{restaurant.restaurant.name}}</span>
+                                                        <div style="font-size: 0.35em; display:inline-block; vertical-align:top;" ng-if="!checkTimings((restaurant.restaurant.timings.day.from | date : 'HH:mm'), (restaurant.restaurant.timings.day.to | date : 'HH:mm'), (restaurant.restaurant.timings.night.from | date : 'HH:mm'), (restaurant.restaurant.timings.night.to | date : 'HH:mm'), (dateNow | date : 'HH:mm'))"><span class="label label-danger">Closed now</span></div>
+                                                    </h1>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-if="noHotel">
+                                <h5 style="font-size:2em" class="text-center">No hotels listed in your town.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 visible-md visible-lg visible-xl">
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>Town</strong></p>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>{{townName}} Chronicles</b></p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Writing Space</b></p></a>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a href="http://hotels.mytownscripts.com" target="_blank"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Hotels</b></p></a>
+                        </div>
+                        <div ng-if="activeOrder">
+                            <hr style="margin-bottom:0em; margin-top:0em;">
+                            <div class="text-center">
+                                <a ui-sref="app.order_status" class="btn"><p style="margin: 1.1em 0em 1.1em 0em;"><span class="label label-danger" style="font-size: 1.5em;"><b>Order Status</b></span></p></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ng-click="openTownActivityWritingCategorySelect()"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><i class="fa fa-pencil-square-o" style="font-size:1.1em;" aria-hidden="true"></i> Start Writing</p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ng-click="openTownActivityNewsReportInput()"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><i class="fa fa-pencil-square-o" style="font-size:1.1em;" aria-hidden="true"></i> Publish News</p></a>
+                        </div>
+                    </div>
+                    <!--<div data-WRID="WRID-151523078301259185" data-widgetType="searchWidget" data-class="affiliateAdsByFlipkart" height="250" width="300" ></div><script async src="//affiliate.flipkart.com/affiliate/widgets/FKAffiliateWidgets.js"></script>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+    <div>
+        <div>
+            <h3>Messages</h3>
+            <div style="border-style:solid; border-color:#D4D4D4; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:#fbfbfb;color:" ng-if="noMessage">
+                <h5 style="font-size:2em" class="text-center">You don't have any messages</h5>
+            </div>
+            <div style="border-style:solid; border-color:#D4D4D4; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:#fbfbfb;color:" ng-repeat="message in messages">
+                <blockquote style="font-size:0.98em; margin-bottom:1em; border-left:0.4em solid #3446a3;">
+                    <h5 style="color:#293882"><img ng-src={{message.senderProfilePicture}} height="30" width="30" class="img-circle">&nbsp;<strong>{{message.senderName}}</strong></h5>
+                    <p>{{message.message}}</p>
+                    <footer class="blockquote-footer"><span class="pull-right">{{message.createdAt | date}}</span></footer>
+                    <div><b>
+                        <span style="color:#e5e5e5;font-size:0.85em">
+                            <span style="padding-left:0.5em; color:#5c6ab5">Email: {{message.senderEmail}}</span>
+                        </span>
+                        </b>
+                    </div>
+                </blockquote>                        
+            </div>
+        </div>
+    </div>
+</div>

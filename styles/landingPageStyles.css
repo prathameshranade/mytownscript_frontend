@@ -1,0 +1,290 @@
+
+.landingPageBody{
+	position: absolute;
+	top: -1.25em;
+	left: -1.25em;
+	right: -2.5em;
+	bottom: -2.5em;
+	width: auto;
+	height: auto;
+	background-image: url(../images/mt.jpg);
+	background-size: cover;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+	z-index: 0;
+}
+
+.grad{
+	position: absolute;
+	top: -1.2em;
+	left: -1.2em;
+	right: -2.4em;
+	bottom: -2.4em;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+	z-index: 1;
+	opacity: 0.7;
+}
+
+.header{
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 3em;
+	font-weight: 200;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+
+.landingRegister{
+	height: 9em;
+	width: 22em;
+	padding: 0.8em;
+	z-index: 2;
+}
+
+#landingRegisterUsername {
+    width: 15.6em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+    margin-top: 0em;
+}
+.landingRegister input[type=text]{
+	width: 7.8em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}
+.landingRegister input[type=email]{
+	width: 15.6em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+    margin-top: 0.51em;
+}
+
+.landingRegister input[type=password]{
+	width: 15.6em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}
+.landingRegister input[type=radio]{
+	background: transparent;
+	color: #b2b2b2;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+}
+.landingRegister label[class=radio-inline] {
+	background: transparent;
+	color: #b2b2b2;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+    margin-top: 0.51em;
+}
+.landingRegister select {
+	width: auto;
+	height: auto;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+    margin-top: 0.51em;
+}
+
+/*#landingRegisterFirstname {
+    width: 7.8em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}
+#landingRegisterLastname {
+    width: 7.8em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}
+#landingRegisterHometown {
+    width: 7.8em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}*/
+#landingRegisterPincode {
+    width: 7.8em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+	margin-top: 0.51em;
+}
+#landingRegisterBirthdate{
+	width: 10.5em;
+	height: 1.95em;
+	background: transparent;
+	border: 0.06em solid rgba(255,255,255,0.6);
+	border-radius: 0.15em;
+	color: #b2b2b2;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.25em;
+    margin-top: 0.51em;
+    display: inline-block
+}
+.landingRegister button[type=submit]{
+	width: 15.6em;
+	height: 2.2em;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 0.15em;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.3em;
+	margin-top: 0.51em;
+}
+.landingRegister a[type=button]{
+	width: 15.6em;
+	height: 2.2em;
+	background: #fff;
+	border: 1px solid #4267b2;
+	cursor: pointer;
+	border-radius: 0.15em;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	padding: 0.3em;;
+	margin-top: 0.51em;
+}
+
+.landingRegister input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.landingRegister input[type=button]:active{
+	opacity: 0.6;
+}
+
+.landingRegister input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.landingRegister input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.landingRegister input[type=email]{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+.landingRegister input[type=radio]{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+/*#landingRegisterFirstname {
+    outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+#landingRegisterLastname {
+    outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+#landingRegisterHometown {
+    outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}*/
+#landingRegisterPincode {
+    outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+#landingRegisterBirthdate{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.landingRegister input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}

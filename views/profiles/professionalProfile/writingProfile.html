@@ -1,0 +1,172 @@
+<div>
+    <div class="container">
+        <div style="margin:0em 0em 1em 0em; background-color:;color:; padding:0.7em;">
+            <h4 style="margin:0em 0em 0.8em 0em;" class="text-center"></h4>
+            <div class="row" ng-controller="citizenController">
+                <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-4">
+                    <p style="font-size:3em;margin:0em 0em 0em 0em;" class="text-center">{{displayName}}<span style="padding:0.4em 0em 0em 0.3em; font-size:0.45em;display:inline-block; vertical-align:top;" ng-if="citizen.verification.verificationStatus"><i class="fa fa-check-circle" style="color:#707dbe" aria-hidden="true"></i></span></p>
+                    <p style="font-size:2em;margin:0em 0em 1em 0em;" class="text-center">{{citizen.professionalProfile.professions}}<a type="button" style="margin:0em 0em 0em 0.5em; font-size:0.9em;" ng-click="showUpdateProfessionInput()" ng-if="checkUser(citizen._id)"><i class="fa fa-pencil-square-o" style="font-size:0.85em; color:#4858ac;" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Edit Profession"></i></a></p>
+                    <div ng-show="showUpdateProfession">
+                        <form name="ProfileProfessionalProfessionForm" ng-submit="updateProfessionalProfessions()">
+                            <div class="form-group row">
+                                <div class="col-xs-offset-1 col-xs-10">
+                                    <input type="text" class="form-control" placeholder="What are you ?" ng-model="professionalProfile.professions" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xs-offset-8 col-xs-2">
+                                    <button type="submit" class="btn btn-xs" style="background-color:#4858ac; color:#fff;">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="professional_profile_image_section">
+                        <img ng-src={{citizen.professionalProfile.profilePicture}} class="img-responsive img-circle" style="margin:auto;">
+                        <div class="caption text-center" ng-if="checkUser(citizen._id)">
+                            <label for="professional_profile_picture"><h3 style="font-size:1.3em; color:#243172;">Upload photo</h3></label>
+                                <input type="file" file-model="profilePicture.upload" name="profilePicture" id="professional_profile_picture" style="display:none" accept="image/*"><p><button type="button" class="btn btn-xs" style="background-color:#4858ac; color:#fff;" ng-if="profilePicture.upload" ng-click="uploadProfilePicture()">Submit photo</button></p>
+                        </div></div>
+                </div>
+                <div class="col-xs-12 col-md-7">
+                    <div class=""  style="">
+                        <p style="padding:0em 0em 3em 0em"></p>
+                        <div style="padding:0.5em">
+                            <ul id="writerProfileFilter" class="nav nav-pills">
+                                <li class="active"><a data-toggle="pill" data-target="#writerProfileHome">Home</a></li>
+                                <li><a data-toggle="pill" data-target="#writerProfileWorks">Works</a></li>
+                                <li><a data-toggle="pill" data-target="#writerProfileContact">Contact</a></li>
+                            </ul>
+                            <p style="padding:0em 0em 3em 0em"></p>
+                            <div class="tab-content">
+                                <div id="writerProfileHome" class="tab-pane fade in active">
+                                    <p style="font-size:4em; font-family:Georgia, serif; margin:0em 0em 0em 0em;" class="text-center"><strong>Hello,</strong></p>
+                                    <p style="font-size:2em; font-family:Georgia, serif;" class="text-center">Something about me.<a style="margin:0em 0em 0em 0em" ng-click="openEditAboutMeModal()" class="btn" ng-if="checkUser(citizen._id)"><i class="fa fa-pencil-square-o" style="font-size:1.5em; color:#4858ac;" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Write"></i></a></p>
+                                    <p style="font-size:1.2em; font-family:Georgia, serif;" class="text-center">{{citizen.professionalProfile.aboutProfessional}}</p>
+                                    <div ng-if="checkUser(citizen._id)">
+                                        <div><a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;">Writing Space</p></a></div>
+                                        <div><a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;">Mahad Chronicles</p></a></div>
+                                    </div>
+                                </div>
+                                <div id="writerProfileWorks" class="tab-pane fade">
+                                    <p style="font-size:3em; font-family:'Noticia Text', serif; margin:0em 0em 1em 0em;" class="text-center"><strong>My Works</strong><a style="margin:0em 0em 0em 0.5em" ng-click="openWritingProfileCategorySelect()"><i class="fa fa-pencil-square-o" style="font-size:0.65em; color:#4858ac;" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Write"></i></a></p>
+                                    <div style="color:#161616;" ng-if="noWorks">
+                                        <h5 style="font-size:2em" class="text-center">Nothing published yet.</h5>
+                                    </div>
+                                    <div class="row" ng-repeat="writing in citizen.townWorks.writings">
+                                        <div ng-if="!checkWritingType(writing.writingType)">
+                                            <div ng-if="writing.writingImage">
+                                                <h3 class="text-center" style="padding:0em 1em 0em 4em; margin:0em 0em 0.7em 0em; font-size:2.1em;">{{writing.title}}</h3>
+                                                <h6 class="text-center" style="padding:0em 6em 0em 6em;margin:0.7em 0em 1.3em 0em;font-size:0.9em;"><span style="color:#2e3f92">{{writing.writingType}}</span></h6>
+                                                <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-4">
+                                                    <p><img ng-src={{writing.writingImage}} class="img-responsive img-rounded"></p>
+                                                    <div>
+                                                        <strong>
+                                                            <span style="color:#161616; font-size:1em" class="text-center">
+                                                                <span style="padding-left:0.7em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                                <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                                                                <a type="button" ng-click="deleteWritingMain(writing._id)" ng-if="checkUser(citizen._id)"><span style="padding-left:1.2em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                            </span>
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-md-7">
+                                                    <p style="font-size:1.2em; line-height:1.6em;">
+                                                        {{writing.shortDescription}}
+                                                    </p>
+                                                    <p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#4858ac; border-width:0.1em; color:#2e3f92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read More</a></p>
+                                                </div>
+                                            </div>
+                                            <div ng-if="!writing.writingImage">
+                                                <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-12"  style="padding:0.1em 0em 1em 0em; margin-bottom:0.7em; color:#161616;">
+                                                    <h3 class="text-center" style="padding:0em 2em 0em 2.5em; margin:1em 0em 0em 0em; font-size:2.1em">{{writing.title}}</h3>
+                                                    <h6 class="text-center" style="padding:0em 6em 0em 6em;margin:0.7em 0em 1em 0em;font-size:0.9em;"><span style="color:#2e3f92">{{writing.writingType}}</span></h6>
+                                                    <div class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-9">
+                                                        <p class="text-center" style="font-size:1.3em;">{{writing.shortDescription}}</p>
+                                                        <div><b>
+                                                            <span style="font-size:1em;">
+                                                                <span><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                                <a style="color:#161616;" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})"><span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span></a>
+                                                                <a type="button" ng-click="deleteWritingMain(writing._id)" ng-if="checkUser(citizen._id)"><span style="padding-left:10em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                            </span>
+                                                            </b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="checkWritingType(writing.writingType)">
+                                            <div class="col-xs-offset-1 col-xs-10 col-md-offset-1 col-md-12"  style="padding:0.1em 0em 1em 0em; margin-bottom:0.7em; color:#161616;">
+                                                <h3 class="text-center" style="padding:0em 2em 0em 2.5em; margin:1em 0em 0em 0em; font-size:2.1em"><strong>{{writing.title}}</strong></h3>
+                                                <h6 class="text-center" style="padding:0em 6em 0em 6em;margin:0.7em 0em 1em 0em;font-size:0.9em;"><span style="color:#2e3f92">{{writing.writingType}}</span></h6>
+                                                <div class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-9">
+                                                    <p class="text-center" style="font-size:1.5em;" ng-bind-html="writing.article"></p>
+                                                    <div><b>
+                                                        <span style="font-size:1em;">
+                                                            <span><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                            <a style="color:#161616;" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})"><span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span></a>
+                                                            <a type="button" ng-click="deleteWritingMain(writing._id)" ng-if="checkUser(citizen._id)"><span style="padding-left:10em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                        </span>
+                                                        </b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="writerProfileContact" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="row row-content">
+                                        <div class="col-md-offset-2 col-xs-10">
+                                            <p style="font-size:1.8em; margin:0em 0em 1em 0em; color:#243172;">Send your Message here</p>
+                                        </div>
+                                        <div class="col-md-offset-2 col-xs-12 col-sm-9">
+                                            <form class="form-horizontal" role="form" name="professionalProfileMessageForm" ng-submit="sendMessage()">
+                                                <div class="form-group" ng-class="{ 'has-error has-feedback' : professionalProfileMessageForm.emailid.$invalid && !professionalProfileMessageForm.emailid.$pristine }">
+                                                    <div class="col-sm-12">
+                                                        <input type="email" class="form-control" id="professional_profile_emailid" name="emailid" placeholder="Email" ng-model="visitorMessage.senderEmail" required>
+                                                        <span ng-show="professionalProfileMessageForm.emailid.$invalid && !professionalProfileMessageForm.emailid.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                                        <span ng-show="professionalProfileMessageForm.emailid.$invalid && !professionalProfileMessageForm.emailid.$pristine" class="help-block">Enter a valid email address.</span>
+                                                        <span ng-show="professionalProfileMessageForm.emailid.$error.required && !professionalProfileMessageForm.emailid.$pristine" class="help-block">Enter a valid email address.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <textarea class="form-control" id="professional_profile_visitor_message" name="professionalProfileVisitorMessage" rows="4" ng-model="visitorMessage.message" placeholder="Message" required></textarea>
+                                                    </div>
+                                                </div> 
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-8 col-sm-2">
+                                                        <button type="submit" class="btn" ng-disabled="professionalProfileMessageForm.$invalid" style="background-color:#4858ac;color:#fff;">Send Message</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-offset-2 col-md-10">
+                                            <p style="font-size:3em; font-family:Georgia, serif; margin:0em 0em 0em 0em; color:#243172;">Or, Reach me at,</p>
+                                            <p style="font-size:1.2em; font-family:Georgia, serif;"><span style="color:#243172;">Email: </span>{{citizen.professionalProfile.professionalEmail}}<a type="button" style="margin:0em 0em 0em 0.5em;" ng-click="showUpdateEmailInput()" ng-if="checkUser(citizen._id)"><i class="fa fa-pencil-square-o" style="font-size:0.85em; color:#4858ac;" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Edit Email"></i></a></p>
+                                            <div ng-show="showUpdateEmail">
+                                                <form name="ProfileProfessionalEmailForm" ng-submit="updateProfessionalEmail()">
+                                                    <div class="form-group row">
+                                                        <div class="col-xs-10">
+                                                            <input type="email" class="form-control" placeholder="Email" ng-model="professionalProfile.email" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-xs-offset-7 col-xs-2">
+                                                            <button type="submit" class="btn btn-xs" style="background-color:#4858ac; color:#fff;">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

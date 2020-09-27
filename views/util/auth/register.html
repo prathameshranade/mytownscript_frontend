@@ -1,0 +1,91 @@
+<div class="ngdialog-message">
+    <div class="">
+    <div class="">
+    <h3>Register </h3>
+    </div>
+        <div class="">
+            <form name="registerForm" ng-submit="doRegister()">
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerForm.registerUsername.$error.required && !registerForm.registerUsername.$pristine }">
+                        <label for="registerUsername">Username</label>
+                        <input type="text" class="form-control input-sm" name="registerUsername" id="registerUsername" placeholder="Username" ng-model="registerData.username" required>
+                        <span ng-show="registerForm.registerUsername.$error.required && !registerForm.registerUsername.$pristine" class="help-block"> Your Username is required. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerError }">
+                        <span ng-show="registerError" class="help-block"> Use a different Username. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerForm.registerPassword.$error.required && !registerForm.registerPassword.$pristine }">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" class="form-control input-sm" name="registerPassword" id="registerPassword" placeholder="Password" ng-model="registerData.password" required>
+                        <span ng-show="registerForm.registerPassword.$error.required && !registerForm.registerPassword.$pristine" class="help-block"> Your Password is required. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerForm.registerFirstname.$error.required && !registerForm.registerFirstname.$pristine }">
+                        <label for="registerFirstname">First Name</label>
+                        <input type="text" class="form-control input-sm" name="registerFirstname" id="registerFirstname" placeholder="First name" ng-model="registerData.firstname" required>
+                        <span ng-show="registerForm.registerFirstname.$error.required && !registerForm.registerFirstname.$pristine" class="help-block"> Your First name is required. </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': registerForm.registerLastname.$error.required && !registerForm.registerLastname.$pristine }">
+                        <label for="registerLastname">Last Name</label>
+                        <input type="text" class="form-control input-sm" name="registerLastname" id="registerLastname" placeholder="Last Name" ng-model="registerData.lastname" required>
+                        <span ng-show="registerForm.registerLastname.$error.required && !registerForm.registerLastname.$pristine" class="help-block"> Your Last name is required. </span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': registerForm.registerEmail.$error.required &&  !registerForm.registerEmail.$pristine }">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" class="form-control" name="registerEmail" placeholder="Email" ng-model="registerData.email" required>
+                    <span ng-show="registerForm.registerEmail.$error.required && !registerForm.registerEmail.$pristine" class="help-block"> Your Email is required. </span>
+                </div>
+                <div class="row">
+                    <div ng-class="{ 'has-error': registerForm.registerHometown.$error.required && !registerForm.registerHometown.$pristine }" class="col-xs-6">
+                        <label for="registerHometown">Hometown</label>
+                        <input type="text" class="form-control" name="registerHometown" placeholder="Hometown" ng-model="registerData.hometown" required>
+                        <span ng-show="registerForm.registerHometown.$error.required && !registerForm.registerHometown.$pristine" class="help-block"> Your Hometown is required. </span>
+                    </div>
+                    <div ng-class="{ 'has-error': registerForm.registerPincode.$error.required &&  !registerForm.registerPincode.$pristine }" class="col-xs-6">
+                        <label for="registerPincode">Pincode</label>
+                        <input type="number" class="form-control" name="registerPincode" placeholder="Pincode" min="100000" ng-model="registerData.pincode" required>
+                        <span ng-show="registerForm.registerPincode.$error.required && !registerForm.registerPincode.$pristine" class="help-block"> Your Pincode is required. </span>
+                    </div>
+                </div>
+                <!--<div class="row">
+                    <div ng-class="{ 'has-error': registerForm.registerBirthdate.$error.required && !registerForm.registerBirthdate.$pristine }" class="col-xs-6">
+                        <input type="date" class="form-control" name="registerBirthdate" placeholder="Birthdate" ng-model="registerData.birthdate" required> <span style="font-size:1em;color:#b2b2b2">Birthday</span>
+                        <span ng-show="registerForm.registerBirthdate.$error.required && !registerForm.registerBirthdate.$pristine" class="help-block"> Your Birthdate is required. </span>
+                    </div>
+                    <div ng-class="{ 'has-error': registerForm.registerGender.$error.required &&  !registerForm.registerGender.$pristine }" class="col-xs-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="registerGender" value="male" ng-model="registerData.gender" required>Male
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="registerGender" value="female" ng-model="registerData.gender">Female
+                        </label>
+                        <span ng-show="registerForm.registerGender.$error.required && !registerForm.registerGender.$pristine" class="help-block"> Your Gender is required. </span>
+                    </div>
+                </div>-->
+                <!--<div class="form-group">
+                    <label for="contactnumber">Last Name</label>
+                    <input type="text" class="form-control input-sm" id="contactnumber" placeholder="Contact Number" ng-model="registerData.contactnumber">
+                </div>-->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="rememberMe"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-info btn-sm" ng-disabled="registerForm.$invaled" >Register</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog("Cancel")>Cancel</button>
+        </form>
+    </div>
+    <div>
+
+    </div>
+    </div>
+    <div class="col-xs-12 col-sm-5"></div>
+</div>

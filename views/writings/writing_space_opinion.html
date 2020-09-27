@@ -1,0 +1,191 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-3 col-md-6" ng-if="!showWritingSpaceIndividual">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+                    <div>
+                        <h3>{{message}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="showWritingSpaceIndividual">
+                <div class="col-md-3 visible-md visible-lg visible-xl" style="padding: 0em 0em 0em 1.1em;">
+                    <div class="" style="">
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 0.5em 0em; margin-bottom:0.7em; color:#000;">
+                            <div class="row" style="">
+                                <div class="col-xs-offset-1 col-xs-3" style="">
+                                    <img ng-src={{profilePicture}} class="img-circle" height="65em" width="60em">
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    <h3 style="margin-bottom:0em;margin-top:0.3em"><strong>{{username}}</strong></h3>        <!--Check Strong or not-->
+                                    <h5 class="text-muted" style="margin-top:0.5em;">{{professions}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; padding:0.5em 0.5em 0em 0.5em; margin:0em 0em 0.7em 0em; color:#000;">
+                            <div>
+                                <p class="text-center" style="font-size:1.7em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>{{writing.writingType}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="col-md-6">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" ng-if="!contemplativeBackground">
+                    <div class="" style="background-color:;color:">
+                        <h2 class="text-center" style="padding:0em 1em 0em 1em">{{writing.title}}</h2>
+                        <div style="color:#a8a8a8" class="text-center">
+                            <h5><em style="padding-right:0.5em">by</em>
+                                <a style="color:#293882;" ui-sref="app.professional_profile({scope:writing.authorID.authorScope,id: writing.authorID.authorID})"><img ng-src={{writing.authorID.authorProfilePicture}} height="25" width="25" class="img-circle">&nbsp;{{writing.authorID.authorName}}</a><span style="font-size:0.75em;padding-left:1em;">{{writing.createdAt | date}}</span>
+                            </h5>
+                        </div>
+                        <p class="text-center" style="font-size:1.3em; margin-top:1em; margin-bottom:0.5em; color:#020202">{{writing.shortDescription}}</p>
+                        <p ng-if=writing.writingImage><img ng-src={{writing.writingImage}} class="img-responsive" style="margin:auto;"></p>
+                        <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                        <div ng-controller="citizenController"><b>
+                            <span style="color:#999999; font-size:1em" class="text-center">
+                                <span style="padding-left:2em"><a type="button" ng-click="dislikeWriting()" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWriting()" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                                <a type="button" ng-click="deleteWriting()"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                            </span>
+                            </b>
+                        </div>
+                        <hr style="margin-top:1.5%; margin-bottom:1em;">
+                        <p style="font-size:1.2em; line-height:1.6em;" ng-bind-html="writing.article"></p>
+                    </div>
+                    <!--<div class="row">
+                        <div class="col-xs-4">
+                            <button class="btn" style="background-color:#FCFCFC;" ng-click="registerClick()"><div data-WRID={{writing.commercialInfo.advertiseLink.flipkart.dataWRID}} data-widgetType={{writing.commercialInfo.advertiseLink.flipkart.datawidgetType}}  data-class="affiliateAdsByFlipkart" height={{writing.commercialInfo.advertiseLink.flipkart.height}} width={{writing.commercialInfo.advertiseLink.flipkart.width}}></div><script async src="//affiliate.flipkart.com/affiliate/widgets/FKAffiliateWidgets.js"></script></button>
+                        </div>
+                        <div class="col-xs-8 visible-xs visible-sm">
+                            <div data-WRID="WRID-151523078301259185" data-widgetType="searchWidget" data-class="affiliateAdsByFlipkart" height="250" width="300" ></div>
+                        </div>
+                    </div>-->
+                    <div>
+                        <div ng-show="writing.commercialInfo.advertiseLink.flipkart.dataWRID">
+                            <hr style="margin-top:1.5%; margin-bottom:1.5%;">
+                            <button class="btn" style="background-color:#FCFCFC;" ng-click="registerClick()"><div data-WRID={{writing.commercialInfo.advertiseLink.flipkart.dataWRID}} data-widgetType={{writing.commercialInfo.advertiseLink.flipkart.datawidgetType}}  data-class="affiliateAdsByFlipkart" height={{writing.commercialInfo.advertiseLink.flipkart.height}} width={{writing.commercialInfo.advertiseLink.flipkart.width}}></div></button>
+                        </div>
+                        <div ng-show="!(writing.commercialInfo.advertiseLink.flipkart.dataWRID)" class="visible-xs visible-sm">
+                            <hr style="margin-top:1.5%; margin-bottom:1.5%;">
+                            <div data-WRID="WRID-151523078301259185" data-widgetType="searchWidget" data-class="affiliateAdsByFlipkart" height="250" width="300" ></div>
+                        </div>
+                        <script async src="//affiliate.flipkart.com/affiliate/widgets/FKAffiliateWidgets.js"></script>
+                    </div>
+                    <!--<button class="btn" style="background-color:#FCFCFC;" ng-click="registerClick()"><div data-WRID={{writing.commercialInfo.advertiseLink.flipkart.dataWRID}} data-widgetType={{writing.commercialInfo.advertiseLink.flipkart.datawidgetType}}  data-class="affiliateAdsByFlipkart" height={{writing.commercialInfo.advertiseLink.flipkart.height}} width={{writing.commercialInfo.advertiseLink.flipkart.width}}></div><script async src="//affiliate.flipkart.com/affiliate/widgets/FKAffiliateWidgets.js"></script></button>-->
+                    <div>
+                    <div>
+                        <hr style="color:#7e7e7e; margin-top:1.5%; margin-bottom:1.5%;">
+                        <h4>Comments</h4>
+                        
+                        <div>
+                            <div style="border-style:solid; border-color:#D4D4D4; border-width:0.1em ; margin:0.1em 0em 0.1em 0em; background-color:;color:" ng-repeat="comment in writing.comments.comments">
+                                <blockquote style="font-size:0.98em; margin-bottom:1em; border-left:0.4em solid #3446a3;">
+                                    <a ui-sref="app.professional_profile({scope:comment.commenterScope,id: comment.postedBy})"><h5 style="color:#293882"><img ng-src={{comment.commenterProfilePicture}} height="30" width="30" class="img-circle">&nbsp;<strong>{{comment.commenterName}}</strong></h5></a>
+                                    <p>{{comment.comment}}</p>
+                                    <footer class="blockquote-footer"><span class="pull-right">{{comment.createdAt | date}}</span></footer>
+                                    <div ng-controller="citizenController"><b>
+                                        <span style="color:#999999; font-size:1em" class="text-center">
+                                            <a type="button" ng-click="deleteComment(comment._id)"><span ng-if="checkUser(comment.postedBy)" style="padding-left:30em; color:#707DBE; font-size:1.1em"><i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                        </span>
+                                        </b>
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div style="border-style:solid; border-color:#eee; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:;color:">
+                            <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" style="margin-top:1em;margin-bottom:0.1em">                        <!-- novalidate-->
+                                <div class="form-group row" style="margin-bottom:0.3em">    <!-- ng-class="{ 'has-error' : commentForm.comments.$error.required && !commentForm.comments.$pristine }"-->
+                                    <div class="col-xs-2"><img ng-src={{profilePicture}} height="30" width="30" class="img-circle pull-right"></div>
+                                    <div class="col-xs-8">
+                                        <textarea class="form-control" rows="4" name="comments" ng-model="mycomment.comment" style="overflow-x: hidden;" required></textarea>
+                                        <!--<span ng-show="commentForm.comments.$error.required && !commentForm.comments.$pristine" class="help-block">Your comments are required.</span>-->
+                                    </div>
+                                </div> 
+                                <div class="form-group row" style="margin-bottom:0.5em;">
+                                    <div class="col-xs-offset-7 col-xs-3">
+                                        <button type="submit" class="btn btn-xs" style="background-color:#4858ac; color:#fff">Submit Comment</button>       <!--ng-disabled="commentForm.$invalid"-->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="" style="background-color:#2c2c2c;color:#fff;padding:1em 0em 1em 0em;" ng-if="contemplativeBackground">
+                    <h2 class="text-center" style="padding:0em 2em 0em 2em"><strong>{{writing.title}}</strong></h2>
+                    <h6 class="text-center" style="padding:0em 6em 0em 6em"><span style="color:#8590C7">{{writing.writingType}}</span> by <span style="color:#5c6ab5">{{writing.authorID.authorName}}</span></h6>
+                    <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                    <p class="" style="padding:0em 3em 0em 3em; font-size:{{articleFontSize}};" ng-bind-html="writing.article"></p>
+                    <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                    <div ng-controller="citizenController">
+                        <b>
+                            <span style="color:#999999; font-size:1em" class="text-center">
+                                <span style="padding-left:4.5em"><a type="button" ng-click="dislikeWriting()" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWriting()" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                            
+                                <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                            
+                                <a type="button" ng-click="deleteWriting()"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#707DBE; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                            <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>
+                            <span style="padding-left:15em; color:#707DBE">Review</span>-->
+                            </span>
+                        </b>
+                    </div>
+                    <div style="border-style:solid; border-color:#D4D4D4; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:#2c2c2c;color:#f2f2f2">
+                        <h4 style="padding-left:1em;">Comments</h4>
+                    </div>
+                    <div>                        
+                        <div style="border-style:solid; border-color:#D4D4D4; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:#2c2c2c;color:#f2f2f2"  ng-repeat="comment in writing.comments.comments">
+                            <blockquote style="font-size:0.98em; margin-bottom:1em; border-left:0.4em solid #2c2c2c;">
+                                <a ui-sref="app.professional_profile({scope:comment.commenterScope,id: comment.postedBy})"><h5 style="color:#5c6ab5"><img ng-src={{comment.commenterProfilePicture}} height="30" width="30" class="img-circle">&nbsp;<strong>{{comment.commenterName}}</strong></h5></a>
+                                <p style="padding-left:3em">{{comment.comment}}</p>
+                                <div ng-controller="citizenController"><b>
+                                    <span style="color:#999999; font-size:1em" class="text-center">
+                                        <a type="button" ng-click="deleteComment(comment._id)"><span ng-if="checkUser(comment.postedBy)" style="padding-left:30em; color:#707DBE; font-size:1.1em"><i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                    </span>
+                                    </b>
+                                </div>
+                            </blockquote>
+                        </div>                            
+                    </div>
+                    <div style="border-style:solid; border-color:#eee; border-width:0.1em ; margin:0em 0em 0em 0em; background-color:#2c2c2c;color:#f2f2f2">
+                    <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" style="margin-top:1em;margin-bottom:0.1em" novalidate>
+                        <div class="form-group row" ng-class="{ 'has-error' : commentForm.comments.$error.required && !commentForm.comments.$pristine }" style="margin-bottom:0.3em">
+                            <div class="col-xs-2"><img ng-src={{profilePicture}} height="30" width="30" class="img-circle pull-right"></div>
+                            <div class="col-xs-8">
+                                <textarea class="form-control" rows="3" name="comments" ng-model="mycomment.comment" style="overflow-x: hidden;" required></textarea>
+                                <span ng-show="commentForm.comments.$error.required && !commentForm.comments.$pristine" class="help-block">Your comments are required.</span>
+                            </div>
+                        </div> 
+                        <div class="form-group row" style="margin-bottom:0em;">
+                            <div class="col-xs-offset-7 col-xs-3">
+                                <button type="submit" class="btn btn-xs" ng-disabled="commentForm.$invalid" style="background-color:#4858ac;    color:#fff">Submit Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            
+                <div class="col-md-3 visible-md visible-lg visible-xl">
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>{{townName}} Chronicles</b></p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Writing Space</b></p></a>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ng-click="openWritingSpaceOpinionCategorySelect()"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><i class="fa fa-pencil-square-o" style="font-size:1.1em;" aria-hidden="true"></i> Start Writing</p></a>
+                        </div>
+                    </div>
+                    <div data-WRID="WRID-151523078301259185" data-widgetType="searchWidget" data-class="affiliateAdsByFlipkart" height="250" width="300" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

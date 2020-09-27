@@ -1,0 +1,86 @@
+<p style="padding:7em 0em 0em 0em"></p>
+<div class="container">
+    <div class="row row-content">
+        <div class="col-xs-12" ng-if="!showMenu">
+            <h3> {{message}} </h3>
+        </div>
+        <div ng-if="showMenu">
+<!--        <a ui-sref="app.customerOrderStatus">    -->
+            <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; color:#000; margin-left:0em;">
+                <div class="row" style="margin-bottom: 2em;">
+                <div class="text-center">
+                    <a ng-click="placeOnTray()" class="btn btn-sm btn-danger" role="button">Place on the tray<i class="fa fa-long-arrow-right"></i></a>&nbsp;
+                    <h6 style="color:cadetblue"><em>*Images of dishes only for reference</em></h6>
+                    <h6 style="color:cadetblue"><em>*Actual food may vary from photos</em></h6>
+                    <!--<button ng-click="toggleDetails()" class="btn btn-xs btn-primary" type="button">
+                        {{showDetails ? 'Hide Details':'Show Details'}}
+                    </button>-->
+                </div>
+            </div>
+                <div class="row" style="margin-bottom: 2em;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{active:isSelected(1)}">
+                        <a ng-click="select(1)" aria-controls="all menu" role="tab">The Menu</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(2)}">
+                        <a ng-click="select(2)" aria-controls="soups_starters" role="tab">Soups/Starters</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(3)}">
+                        <a ng-click="select(3)" aria-controls="maincourse" role="tab">Main course</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(4)}">
+                        <a ng-click="select(4)" aria-controls="tandoor" role="tab">Tandoor</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(5)}">
+                        <a ng-click="select(5)" aria-controls="rice" role="tab">Rice</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(6)}">
+                        <a ng-click="select(6)" aria-controls="dessert_beverages" role="tab">Desserts/Beverages</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:isSelected(7)}">
+                        <a ng-click="select(7)" aria-controls="other" role="tab">Other</a>
+                    </li>
+                </ul>
+            </div>
+                <div class="row text-center" style="margin-bottom: 2em;">
+                <div style="margin-bottom: 0.5em;">Total Bill:&nbsp;&nbsp;<span class="label label-warning"><b>{{totalBill}}</b></span></div>
+                <div><small><em>Minimum order: <span class="label label-danger">150</span></em></small></div>
+            </div>
+                <div class="tab-content">
+            <ul class="media-list tab-pane fade in active">
+                <li class="media" ng-repeat="dish in dishes | filter:filtText">
+                    <div class="media-left media-middle">
+                        <a ui-sref="app.dishdetails({id: dish.id})">
+                            <img class="media-object img-thumbnail img-responsive" ng-src={{dish.image}} alt="Photo for Dish" width="200em">
+                        </a>
+                    </div>
+                    <div class="media-body row">
+                        <div class="col-xs-8">
+                        <h2 class="media-heading" style="color:#333;">{{dish.name}}
+                            <span class="badge">Rs. {{dish.price}}</span>
+<!--                            <span class="badge pull-right">Quantity: {{dish.quantity}}</span>-->
+                        </h2>
+<!--                        <p ng-show="showDetails">{{dish.description}}</p>-->
+                        </div>
+                        <div class="col-xs-4">
+                            <span ng-show="!addDishButtonStatus(dish._id)">
+                                <button class="btn btn-sm btn-danger pull-right" type="button" ng-click="addToOrder(dish)">Add</button>
+                            </span>
+                            <span ng-show="addDishButtonStatus(dish._id)">
+                            <button class="btn btn-sm btn-danger pull-right" type="button"  ng-click="reduceQuantity(dish)"><!-- ng-click="addPickUp(dish._id)"-->
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <input class="pull-right" type="number" style="height:2em;width:3em" id="orderQty_{{dish._id}}" placeholder="QTY" min="0">
+                            <button class="btn btn-sm btn-danger pull-right" type="button" ng-click="addQuantity(dish)"><!-- ng-click="addPickUp(dish._id)"-->
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>

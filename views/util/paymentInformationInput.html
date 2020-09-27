@@ -1,0 +1,100 @@
+<div class="ngdialog-message">
+    <div>
+        <div class="">
+            <h3>Payment Details </h3>
+        </div>
+        <div class="">&nbsp;</div>
+        <div class="">
+<!--            <form name="paymentInfoForm" ng-submit="submitInfo()" novalidate>-->
+            <div class="text-center">
+                <label class="radio-inline">
+                    <input type="radio" name="paymentMethod" value="UPI" ng-model="paymentMethod" required><strong>UPI (BHIM, Tez etc)</strong>
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="paymentMethod" value="bankTransfer" ng-model="paymentMethod"><strong>Bank Transfer</strong>
+                </label>
+            </div>
+            <div ng-show="checkPaymentMethod()">
+                <form name="paymentUPIInfoForm" ng-submit="submitUpiInfo()" novalidate>
+                    <div class="">
+                        <h3 style="font-size:1.3em;color:#243172;">Enter the UPI ID for the account where you would like to recieve your earned money.</h3>
+                    </div>
+                    <div class="">&nbsp;</div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentUPIInfoForm.upiId.$error.required && !paymentUPIInfoForm.upiId.$pristine }">
+                            <label for="upiId">UPI ID</label>
+                            <input type="text" class="form-control input-sm" name="upiId" id="upiId" placeholder="UPI" ng-model="paymentInfo.upiId" required>
+                            <span ng-show="paymentUPIInfoForm.upiId.$error.required && !paymentUPIInfoForm.upiId.$pristine" class="help-block"> Your UPI ID is required. </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentUPIInfoForm.upiIdConfirm.$error.required && !paymentUPIInfoForm.upiIdConfirm.$pristine }">
+                            <label for="upiId_confirm">UPI ID</label>
+                            <input type="text" class="form-control input-sm" name="upiIdConfirm" id="upiId_confirm" placeholder="Confirm UPI" required>
+                            <span ng-show="paymentUPIInfoForm.upiIdConfirm.$error.required && !paymentUPIInfoForm.upiIdConfirm.$pristine" class="help-block"> Please confirm your UPI ID</span>
+                            <h5 id="upiIDUnmatchedMessage"></h5>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-sm" ng-disabled="paymentUPIInfoForm.$invalid">Save</button>
+                    <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog()>Cancel</button> &nbsp; &nbsp;
+                </form>
+            </div>
+            <div ng-show="!checkPaymentMethod()">
+                <form name="paymentInfoForm" ng-submit="submitBankAccountInfo()" novalidate>
+                    <div class="">
+                        <h3 style="font-size:1.3em;color:#243172;">Enter the details for the account where you would like to recieve your earned money.</h3>
+                    </div>
+                    <div class="">&nbsp;</div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentInfoForm.bankName.$error.required && !paymentInfoForm.bankName.$pristine }">
+                            <label for="payment_bank_name">Your bank's name:</label>
+                            <input type="text" class="form-control input-sm" name="bankName" id="payment_bank_name" placeholder="Account number" ng-model="paymentInfo.bankName" required>
+                            <span ng-show="paymentInfoForm.bankName.$error.required && !paymentInfoForm.bankName.$pristine" class="help-block"> Your Bank's name is required. </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentInfoForm.accountNumber.$error.required && !paymentInfoForm.accountNumber.$pristine }">
+                            <label for="payment_account_number">Account number:</label>
+                            <input type="number" class="form-control input-sm" name="accountNumber" id="payment_account_number" placeholder="Account number" ng-model="paymentInfo.bankAccountNumber" required>
+                            <span ng-show="paymentInfoForm.accountNumber.$error.required && !paymentInfoForm.accountNumber.$pristine" class="help-block"> Your Account number is required. </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentInfoForm.accountNumberConfirm.$error.required && !paymentInfoForm.accountNumberConfirm.$pristine }">
+                            <label for="payment_account_number_confirm">Confirm Account number:</label>
+                            <input type="number" class="form-control input-sm" name="accountNumberConfirm" id="payment_account_number_confirm" placeholder="Confirm Account number" required>
+                            <span ng-show="paymentInfoForm.accountNumberConfirm.$error.required && !paymentInfoForm.accountNumberConfirm.$pristine" class="help-block"> Please confirm your account number. </span>
+                            <h5 id="accountNumberUnmatchedMessage"></h5>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentInfoForm.accountHolderName.$error.required && !paymentInfoForm.accountHolderName.$pristine }">
+                            <label for="payment_account_holder_name">Account holder's name:</label>
+                            <input type="text" class="form-control input-sm" name="accountHolderName" id="payment_account_holder_name" placeholder="Account number" ng-model="paymentInfo.accountHolderName" required>
+                            <span ng-show="paymentInfoForm.accountHolderName.$error.required && !paymentInfoForm.accountHolderName.$pristine" class="help-block"> Account holder's name is required. </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': paymentInfoForm.IFSCCode.$error.required && !paymentInfoForm.IFSCCode.$pristine }">
+                            <label for="payment_branch_ifsc_code">IFSC Code:</label>
+                            <input type="text" class="form-control input-sm" name="IFSCCode" id="payment_branch_ifsc_code" placeholder="IFSC code of the home branch" ng-model="paymentInfo.IFSCCode" required>
+                            <span ng-show="paymentInfoForm.IFSCCode.$error.required && !paymentInfoForm.IFSCCode.$pristine" class="help-block"> Your branch's IFSC code is required. </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error': loginForm.loginUsername.$error.required && !loginForm.loginUsername.$pristine }">
+                            <label for="loginUsername">Account type:</label>
+                            <select ng-model="paymentInfo.accountType" ng-options="item for item in accountTypes"></select>
+                            <span ng-show="paymentInfoForm.loginPassword.$error.required && !paymentInfoForm.loginPassword.$pristine" class="help-block"> Your Password is required. </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-sm" ng-disabled="paymentInfoForm.$invalid">Save</button>
+                    <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog()>Cancel</button> &nbsp; &nbsp;
+                </form>
+            </div>
+            <!--<button type="submit" class="btn btn-info btn-sm" ng-disabled="paymentInfoForm.$invalid">Save</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click=closeThisDialog()>Cancel</button> &nbsp; &nbsp;
+            </form>-->
+        </div>
+    </div>
+</div>

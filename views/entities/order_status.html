@@ -1,0 +1,170 @@
+<div class="container">
+<!--    <p style="padding:1em 0em 0em 0em"></p>-->
+    <div class="row row-content">
+        <div class="col-xs-12" ng-if="!showFoodTray">
+            <h3> {{message}} </h3>
+        </div>
+        <div ng-if="showFoodTray">
+            
+<!--            <p style="padding:10em 0em 0em 0em"></p>-->
+        <div style="background-color:#FCFCFC; border-style:solid; border-color:#eee; border-width:0.1em; color:#000; margin-left:0em;">
+            <div class="row">
+                <div class="text-center col-xs-12" style="margin:0em 0em 1em 0em;">
+                    <h2 style="font-size:4em;">Your Order Status</h2>
+                    <div style="margin:0em 0em 1em 0em;">
+                        <a>
+                            <img src="../../images/takeaway2_1.png" class="img-thumbnail img-responsive" style="margin:auto">
+                        </a>
+                    </div>
+                    <a ng-click="deleteOrder()" class="btn btn-xs btn-danger" type="button" ng-if="!orderAccepted">
+                        Cancel Order
+                    </a>
+                    <!--<a ng-click="deleteOrder()" class="btn btn-xs btn-primary" type="button">
+                        Cancel Order
+                    </a>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <h2>Order accepted</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                    <span ng-show="orderAccepted"><i class="fa fa-check-circle" style="font-size:3em;"></i></span>
+                                    <span ng-show="!orderAccepted"><h3 style="font-size:2em;">.....</h3></span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="panel-footer text-center">
+                            Order Acceptance Status
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <h2>Order ready</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                    <span ng-show="orderReady"><i class="fa fa-check-circle" style="font-size:3em;"></i></span>
+                                    <span ng-show="!orderReady"><h3 style="font-size:2em;">.....</h3></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-footer text-center">
+                            Order Ready Status
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="panel panel-info col-xs-12">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Your Order</h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--<ul class="media-list">
+                            <li class="media" ng-repeat="dish in dishes">
+                                <div class="media-left media-middle">
+                                    <a ui-sref="app.dishdetails({id: dish.id})">
+                                        <img class="media-object img-thumbnail img-responsive" ng-src={{dish.dish.image}} alt="Photo for Dish" width="200em">
+                                    </a>
+                                </div>
+                                <div class="media-body row">
+                                    <div class="col-xs-8">
+                                        <h2 class="media-heading" style="color:#333;">{{dish.dish.name}}
+                                            <span class="badge">Quantity: {{dish.quantity}}</span>
+                                        </h2>
+                                        <p ng-show="showDetails">{{dish.dish.description}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>-->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row" style="color:#000">
+                                    <div class="col-xs-2">
+                                        Name
+                                    </div>
+                                    <div class="col-xs-3">
+                                        Order
+                                    </div>
+                                    <div class="col-xs-1">
+                                        Qty
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span>Address and contact</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span>Bill</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span>Status</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row" style="color:#000">
+                                    <div class="col-xs-2">
+                                        {{foodTray.citizenName}}
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="row" ng-repeat="dish in foodTray.dishes track by $index">
+                                            <div class="col-xs-8">
+                                                <div>{{$index+1}}. {{dish.name}}<!-- &nbsp; <button class="btn btn-xs btn-danger pull-right" type="button" ng-click="removeDish(dish)">Remove</button>--></div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div><span class="badge">{{dish.quantity}}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-xs btn-info" type="button" ng-click="toggleContactDetails()">Show details</button>
+                                                <div class="well" style="margin-top:0.5em;" ng-show="showContactDetails">
+                                                    <div style="font-size:0.9em;">
+                                                        <span><b>Contact: </b>{{foodTray.contactInformation.contactNumber}}</span>
+                                                    </div>
+                                                    <div style="font-size:0.9em; margin-top:0.5em;">
+                                                        <span><b>Address: </b><div>{{foodTray.contactInformation.deliveryAddress}}</div></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <div class="col-xs-2">
+                                        <span ng-show="!foodTray.offer">
+                                            <span class="btn" style="color:#f39c12"><b>Rs. {{foodTray.bill}}</b></span>
+                                        </span>
+                                        <span ng-show="foodTray.offer">
+                                            <span style="font-size:1.2em;"><b><span class="label label-warning">Rs.{{foodTray.bill}}</span></b></span>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span ng-show="!(foodTray.accept || foodTray.reject.reject)"><div class="btn-group" role="group" aria-label="..."><button class="btn btn-xs btn-warning" type="button">Pending</button></div></span>
+                                        <span ng-show="(foodTray.accept && !foodTray.ready)"><div class="btn-group" role="group" aria-label="..."><button class="btn btn-xs btn-primary" type="button">Accepted</button></div></span><span ng-show="(foodTray.reject.reject && !foodTray.ready)"><div class="btn-group" role="group" aria-label="..."><button class="btn btn-xs btn-danger" type="button" ng-click="toggleReject()">Rejected</button></div><div class="btn-group" role="group" aria-label="..."><button class="btn btn-xs btn-danger" type="button" ng-click="toggleReject()">Reason</button></div>
+                                        <div class="well" style="margin-top:0.5em;" ng-show="showRejectReason">
+                                            <div style="font-size:0.9em;">
+                                                <span><b>Reason: </b>{{foodTray.reject.reason}}</span>
+                                            </div>
+                                        </div>
+                                        </span>
+                                        <span ng-show="(foodTray.ready && !foodTray.delivery)"><div style="margin:0.2em 0em 0em 0em;"><button class="btn btn-xs btn-success" type="button">Ready</button></div></span>
+                                        <span ng-show="(foodTray.delivery && ! foodTray.delivered)"><div style="margin:0.2em 0em 0em 0em;"><button class="btn btn-xs btn-warning" type="button">On the way</button></div></span>
+                                        <span ng-show="foodTray.delivered"><div style="margin:0.2em 0em 0em 0em;"><button class="btn btn-xs btn-success" type="button">Delivered</button></div></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+<!--            <p style="padding:1em 0em 0em 0em"></p>-->
+        </div>

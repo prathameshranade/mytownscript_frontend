@@ -1,0 +1,61 @@
+<div>
+<div class="ngdialog-message">
+<div>    
+    <div>
+        <h4>{{Message}}</h4>
+        <form name="news_report" ng-submit="sendNewsReport()">
+            <div class="form-group row">
+                <div class="col-xs-offset-1 col-xs-10">
+                    <strong><input type="text" style="height:3em; font-size:1.25em;" class="form-control text-center" placeholder="Title" ng-model="newsReportInput.title" required></strong>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    <textarea class="form-control" placeholder="Subtitle" rows="2" ng-model="newsReportInput.shortDescription"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-9">
+                    <textarea class="form-control" placeholder="Context(If you don't have an image)" rows="1" ng-model="newsReportInput.context" style="overflow: hidden;"></textarea>
+                </div>
+                <div class="col-xs-3">
+                    <!--<input type="text" class="form-control text-center" placeholder="Category" ng-model="newsReportInput.category" required>-->
+                    <label>Category: </label>
+                    <select ng-model="newsCategory" ng-options="item for item in newsCategories" required></select>
+                    <input type="text" class="form-control text-center" placeholder="Category" ng-model="newsReportInput.category" ng-if="(newsCategory == 'Other')">
+                </div>
+            </div>
+            <div>
+                <div class="text-center">
+                    <p style="font-size:1.2em; color:#243172;"><strong>Upload photo for News</strong></p>
+                    <label class="btn btn-sm" style="background-color:#4858ac; color:#fff;" for="news_report_image"> Browse </label><h3 ng-show="file.upload" style="font-size:1em; margin-top:1em; margin-bottom:0em;display:inline-block; padding-left:0.4em;"><i class="fa fa-circle" style="color:#da2429; font-size:0.8em;" aria-hidden="true"></i>&nbsp;<p style="color:#243172; display:inline-block; margin:0em; padding:0em;">1 Photo selected</p></h3>
+                    <br>
+                    <input type="file" file-model="file.upload" name="file" id="news_report_image" style="display:none" accept="image/*">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12">
+                    <textarea class="form-control" placeholder="Report" rows="15" minlength="20" ng-model="newsReportInput.report" required></textarea>
+                </div>
+            </div>
+            <!--<div class="form-group row" ng-if="verified">
+                            <div class="col-xs-12" ng-if="!checkMusing">
+                                <label>Flikart Product Link&nbsp;<button type="button" class="btn btn-xs" style="background-color:#fff; color:#4858ac; padding:0em;" ng-click="toggleAdlinkInfo()"><i class="fa fa-info-circle" style="color:#4858ac;" aria-hidden="true"></i></button></label>
+                                <div style="padding:0em 1em 0em 1em;" ng-show="showAdlinkInfo">
+                                    <p>Search a product on flipkart(which you think, you would be able to sell here), Copy the URL(link) of that product's page from the browser, and paste it in the space below. We would work on the link and make it payable for you.</p>
+                                    <p>Note: Select that product which is relevant to your report or the readers reading it.For example, if you are publishing a news about some new book store, you can sell a book.</p>
+                                </div>
+                                <textarea class="form-control" id="writing_opinion_adLink" placeholder="Flikart Product Link" rows="1"  ng-model="writingSpaceOpinionInput.commercialInfo.advertiseLinkbyUser"></textarea>
+                            </div>
+                        </div>-->
+            <div class="form-group row">
+                <div class="col-xs-offset-8 col-xs-2">
+                    <button type="submit" class="btn" style="background-color:#4858ac; color:#fff">Submit News</button>                                  <!--ng-disabled="feedbackForm.$invalid"-->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>

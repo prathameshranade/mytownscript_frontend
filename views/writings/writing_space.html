@@ -1,0 +1,279 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-3 col-md-6" ng-if="!showWritingSpace">
+                <div style="background-color:#FCFCFC;color:#000;padding:0.85em" >
+                    <div>
+                        <h3>{{message}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="showWritingSpace">
+                <div class="col-md-3 visible-md visible-lg visible-xl" style="padding: 0em 0em 0em 1.1em;">
+                    <div class="" style="">
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em ; padding:1em 0.5em 0.5em 0em; margin-bottom:0.7em; color:#000;">
+                            <div class="row" style="">
+                                <div class="col-xs-offset-1 col-xs-3" style="">
+                                    <img ng-src={{profilePicture}} class="img-circle" height="65em" width="60em">
+                                </div>
+                                <div class="col-xs-8 col-sm-8">
+                                    <h3 style="margin-bottom:0em;margin-top:0.3em"><strong>{{username}}</strong></h3>        <!--Check Strong or not-->
+                                    <h5 class="text-muted" style="margin-top:0.5em;">{{professions}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; padding:0.5em 0.5em 0em 0.5em; margin:0em 0em 0.7em 0em; color:#000;">                                                       <!--Check the colors-->
+                            <div>
+                                <p class="text-center" style="font-size:1.7em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><strong>Writing Space</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div style="" ng-controller="citizenController">
+                        <div class=""  style="background-color:#fff;">
+                            <div style="border-style:solid; border-color:#eee; border-width:0.1em ; padding:0.5em">
+                                <ul id="writingsFilter" class="nav nav-pills">
+                                    <!--data-target instead href to avoid conflict with angular-->
+                                    <li class="active"><a data-toggle="pill" data-target="#writingsOpinion" ng-click="select(1)">Opinion</a></li>
+                                    <li><a data-toggle="pill" data-target="#writings140" ng-click="select(2)">140</a></li>
+                                    <li><a data-toggle="pill" data-target="#writingsMusing" ng-click="select(3)">Musing</a></li>                    <!--Make dark, JQuery-->
+                                    <li><a data-toggle="pill" data-target="#writingsExperience" ng-click="select(4)">Experience</a></li>
+                                    <li><a data-toggle="pill" data-target="#writingsOthers" ng-click="select(5)">Others</a></li>
+                                    <li><a ng-click="openWritingSpaceCategorySelect()"><i class="fa fa-pencil-square-o" style="font-size:1.45em;" aria-hidden="true"></i></a></li> <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="tab-content">
+                                    <div id="writingsOpinion" class="tab-pane fade in active" style="color:#243172">
+                                        <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff; margin-bottom:0.7em;">
+                                            <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                                <h3 class="text-center">Opinion</h3>
+                                            </div>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-if="noRegularWritings">
+                                            <h5 style="font-size:2em" class="text-center">There are no Opinion writings yet.</h5>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-repeat="writing in writings track by $index">
+                                            <div class="" style="background-color:;color:">
+                                                <h3 class="text-center" style="padding:0em 1em 0em 1em; margin-bottom:1%; margin-top:2%;">{{writing.title}}</h3>
+                                                <div style="color:#a8a8a8" class="text-center">
+                                                    <h6><em style="padding-right:0.5em">by</em>
+                                                        <!--ui-sref="app.profile"-->
+                                                        <a style="color:#293882;"><img ng-src={{writing.authorID.authorProfilePicture}} height="25" width="25" class="img-circle">&nbsp;{{writing.authorID.authorName}}</a></h6>
+                                                </div>
+                                                <div class="thumbnail">
+                                                    <p ng-if=writing.writingImage><img ng-src={{writing.writingImage}} class="img-responsive" style="margin:auto;" alt="Photo for writing"></p>
+<!--                                                <hr style="margin-top:1.5%; margin-bottom:1em;">-->
+                                                    <div class="caption">
+                                                        <p style="font-size:1.2em; line-height:1.6em;" class="text-center">
+                                                            {{writing.shortDescription}}
+                                                        </p>
+                                                        <p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#8590C7; border-width:0.1em; background-color:#FCFCFC; color:#2E3F92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read More</a></p>
+                                                    </div>
+                                                </div>
+<!--                                                <hr style="color:#7e7e7e; margin-bottom:1.5%;">-->
+                                                <div><b>
+                                                    <span style="color:#999999; font-size:1em" class="text-center">
+                                                        <span style="padding-left:2em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                        <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                                                        <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>-->
+<!--                                                    <span style="padding-left:18em; color:#707DBE">Review</span>-->
+                                                        <a type="button" ng-click="deleteWritingMain(writing._id)"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                    </span>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="writings140" class="tab-pane fade">
+                                        <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff;margin-bottom:0.7em;background-color:#2c2c2c;color:#fff;">
+                                            <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                                <h3 class="text-center"  style="">140</h3>
+                                            </div>
+                                        </div>
+                                        <div class="" style="background-color:#2c2c2c;color:#fff;padding:0.1em 0em 1em 0em; margin-bottom:0.7em;" ng-if="noContemplativeWritings">
+                                            <h5 style="font-size:2em" class="text-center"></h5>
+                                        </div>
+                                        <div class="" style="background-color:#2c2c2c;color:#fff;padding:0.1em 0em 1em 0em; margin-bottom:0.7em;" ng-repeat="writing in writings track by $index">
+                                            <div>
+                                                <h3 class="text-center" style="padding:0em 2em 0em 2.5em"><strong>{{writing.title}}</strong></h3>
+                                                <h6 class="text-center" style="padding:0em 6em 0em 6em"><span style="color:#8590C7">{{writing.writingType}}</span> by <span style="color:#5c6ab5">{{writing.authorID.authorName}}</span></h6>
+                                                <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                                                <p class="text-center" style="padding:0em 3em 0em 3em; font-size:2em;" ng-bind-html="writing.article"></p>
+                                            <!--<p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#8590C7; border-width:0.1em; background-color:#FCFCFC; color:#2E3F92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read Comments</a></p>-->
+                                                <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                                                <div><strong>
+                                                    <span style="color:#999999; font-size:1em" class="text-center">
+                                                        <span style="padding-left:4.5em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                    
+                                                        <a style="color:#999999;" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})"><span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span></a>
+                                                
+                                                        <a type="button" ng-click="deleteWritingMain(writing._id)"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#707DBE; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                    
+                                                    <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>
+                                                    <span style="padding-left:15em; color:#707DBE">Review</span>-->
+                                                    </span>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="writingsMusing" class="tab-pane fade">
+                                        <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff; margin-bottom:0.7em; background-color:#2c2c2c;color:#fff;">
+                                            <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                                <h3 class="text-center">Musing</h3>
+                                            </div>
+                                        </div>
+                                        <div class="" style="background-color:#2c2c2c;color:#fff;padding:0.1em 0em 1em 0em; margin-bottom:0.7em;" ng-if="noContemplativeWritings">
+                                            <h5 style="font-size:2em" class="text-center">There are no Musings yet.</h5>
+                                        </div>
+                                        <div class="" style="background-color:#2c2c2c;color:#fff;padding:0.1em 0em 1em 0em; margin-bottom:0.7em;" ng-repeat="writing in writings track by $index">
+                                            <h3 class="text-center" style="padding:0em 2em 0em 2.5em"><strong>{{writing.title}}</strong></h3>
+                                            <h6 class="text-center" style="padding:0em 6em 0em 6em"><span style="color:#8590C7">{{writing.writingType}}</span> by <span style="color:#5c6ab5">{{writing.authorID.authorName}}</span></h6>
+                                            <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                                            <p class="text-center" style="padding:0em 3em 0em 3em; font-size:1.5em;" ng-bind-html="writing.article"></p>
+                                        <!--<p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#8590C7; border-width:0.1em; background-color:#FCFCFC; color:#2E3F92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read Comments</a></p>-->
+                                            <hr style="color:#7e7e7e; margin-bottom:1.5%;">
+                                            <div><b>
+                                                <span style="color:#999999; font-size:1em" class="text-center">
+                                                    <span style="padding-left:4.5em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                
+                                                    <a style="color:#999999;" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})"><span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span></a>
+                                                
+                                                    <a type="button" ng-click="deleteWritingMain(writing._id)"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#707DBE; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>
+                                                <span style="padding-left:15em; color:#707DBE">Review</span>-->
+                                                </span>
+                                                </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="writingsExperience" class="tab-pane fade" style="color:#243172">
+                                        <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff; margin-bottom:0.7em;">
+                                            <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                                <h3 class="text-center">Experience</h3>
+                                            </div>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-if="noRegularWritings">
+                                            <h5 style="font-size:2em" class="text-center">There are no writings on Experience yet.</h5>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-repeat="writing in writings track by $index">
+                                            <div class="" style="background-color:;color:">
+                                                <h3 class="text-center" style="padding:0em 1em 0em 1em; margin-bottom:1%; margin-top:2%;">{{writing.title}}</h3>
+                                                <div style="color:#a8a8a8" class="text-center">
+                                                    <h6><em style="padding-right:0.5em">by</em>
+                                                        <a style="color:#293882;"><img ng-src={{writing.authorID.authorProfilePicture}} height="25" width="25" class="img-rounded">&nbsp;{{writing.authorID.authorName}}</a></h6>
+                                                </div>
+                                                <div class="thumbnail">
+                                                    <p ng-if=writing.writingImage><img ng-src={{writing.writingImage}} class="img-responsive" style="margin:auto;" alt="Photo for writing"></p>
+<!--                                                <hr style="margin-top:1.5%; margin-bottom:1em;">-->
+                                                    <div class="caption">
+                                                        <p style="font-size:1.2em; line-height:1.6em;" class="text-center">
+                                                            {{writing.shortDescription}}
+                                                        </p>
+                                                        <p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#8590C7; border-width:0.1em; background-color:#FCFCFC; color:#2E3F92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read More</a></p>
+                                                    </div>
+                                                </div>
+<!--                                                <hr style="color:#7e7e7e; margin-bottom:1.5%;">-->
+                                                <div><b>
+                                                    <span style="color:#999999; font-size:1em" class="text-center">
+                                                        <span style="padding-left:2em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                        <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                                                    <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>-->
+<!--                                                    <span style="padding-left:18em; color:#707DBE">Review</span>-->
+                                                        <a type="button" ng-click="deleteWritingMain(writing._id)"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                    </span>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!--<div id="writingsPoem" class="tab-pane fade" style="color:#243172">                                    
+                                    <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff;">
+                                        <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                            <h3 class="text-center">Poem</h3>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                    <div id="writingsOthers" class="tab-pane fade" style="color:#243172">                                    
+                                        <div style="border-style:solid; border-color:#eee; border-width:0.08em;background-color:#fff;">
+                                            <div class="text-center" style="border-style:solid; border-color:#eee; border-width:0.08em ; margin:0.8em">
+                                                <h3 class="text-center">Others</h3>
+                                            </div>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-if="noRegularWritings">
+                                            <h5 style="font-size:2em" class="text-center">There are no Other writings yet.</h5>
+                                        </div>
+                                        <div style="background-color:#FCFCFC;color:#000;padding:0.85em; margin-bottom:0.7em;" ng-repeat="writing in writings track by $index">
+                                            <div class="" style="background-color:;color:">
+                                                <h3 class="text-center" style="padding:0em 1em 0em 1em; margin-bottom:1%; margin-top:2%;">{{writing.title}}</h3>
+                                                <div style="color:#a8a8a8" class="text-center">
+                                                    <h6><em style="padding-right:0.5em">by</em>
+                                                        <a style="color:#293882;"><img ng-src={{writing.authorID.authorProfilePicture}} height="25" width="25" class="img-rounded">&nbsp;{{writing.authorID.authorName}}</a></h6>
+                                                </div>
+                                                <div class="thumbnail">
+                                                    <p ng-if=writing.writingImage><img ng-src={{writing.writingImage}} class="img-responsive" style="margin:auto;" alt="Photo for writing"></p>
+<!--                                                <hr style="margin-top:1.5%; margin-bottom:1em;">-->
+                                                    <div class="caption">
+                                                        <p style="font-size:1.2em; line-height:1.6em;" class="text-center">
+                                                            {{writing.shortDescription}}
+                                                        </p>
+                                                        <p class="text-center"><a type="button" class="btn btn-sm" style="border-style:solid; border-color:#8590C7; border-width:0.1em; background-color:#FCFCFC; color:#2E3F92; margin:0em 0.5em 0em 0.5em" ui-sref="app.writing_space_opinion({id: writing._id, writingType: writing.writingType})">Read More</a></p>
+                                                    </div>
+                                                </div>
+<!--                                                <hr style="color:#7e7e7e; margin-bottom:1.5%;">-->
+                                                <div><b>
+                                                    <span style="color:#999999; font-size:1em" class="text-center">
+                                                        <span style="padding-left:2em"><a type="button" ng-click="dislikeWritingMain(writing._id)" ng-if="writing.likes.userLikeStatus"><i class="fa fa-heart" aria-hidden="true" style="font-size:1.4em;color:#E50000;"></i></a><a type="button" ng-click="likeWritingMain(writing._id)" ng-if="!writing.likes.userLikeStatus"><i class="fa fa-heart-o" aria-hidden="true" style="font-size:1.4em;color:#3446a3"></i></a><span style="padding-left:0.25em;">{{writing.likes.likesCount}}</span></span>
+                                                        <span style="padding-left:1.2em"><i class="fa fa-comment-o" aria-hidden="true" style="font-size:1.5em;"></i><span style="padding-left:0.4em;">{{writing.comments.commentsCount}}</span></span>
+                                                    <!--<span style="padding-left:1.2em"><span class="glyphicon glyphicon-share-alt" aria-hidden="true" style="font-size:1.2em"></span><span style="padding-left:0.4em;">5</span></span>-->
+<!--                                                    <span style="padding-left:18em; color:#707DBE">Review</span>-->
+                                                        <a type="button" ng-click="deleteWritingMain(writing._id)"><span ng-if="checkUser(writing.authorID.authorID)" style="padding-left:19em; color:#161616; font-size:1.1em"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete"></i></span></a>
+                                                    </span>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-3 visible-md visible-lg visible-xl">
+                    <!--<div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;">Writing Space</p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ng-click="openWritingSpaceCategorySelect()"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><i class="fa fa-pencil-square-o" style="font-size:1.1em;" aria-hidden="true"></i> Start Writing</p></a>
+                        </div>
+                    </div>-->
+                    
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ui-sref="app.town_chronicles"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>{{townName}} Chronicles</b></p></a>
+                        </div>
+                        <hr style="margin-bottom:0em; margin-top:0em;">
+                        <div>
+                            <a ui-sref="app.writing_space"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><b>Writing Space</b></p></a>
+                        </div>
+                    </div>
+                    <div style="background-color:#fff; border-style:solid; border-color:#eee; border-width:0.1em; margin-bottom:0.7em; color:#000; margin-left:0em;">
+                        <div>
+                            <a ng-click="openWritingSpaceCategorySelect()"><p class="text-center" style="font-size:1.5em; color:#2e3f92; padding:0.5em 0em 0em 0em;"><i class="fa fa-pencil-square-o" style="font-size:1.1em;" aria-hidden="true"></i> Start Writing</p></a>
+                        </div>
+                    </div>
+                    
+                    <div data-WRID="WRID-151523078301259185" data-widgetType="searchWidget" data-class="affiliateAdsByFlipkart" height="250" width="300" ></div><script async src="//affiliate.flipkart.com/affiliate/widgets/FKAffiliateWidgets.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
